@@ -118,7 +118,7 @@
                       r1c,ir1e,r1dc,ir1de,r2c,ir2e,r2dc,ir2de,naccr, &
                       s1c,is1e,s1dc,is1de,naccs,naccds)
 
-        complex(knd), intent(in)   ::  c
+        complex(knd), intent(in)   ::  cc
         real(knd), intent (in)     ::  x1, arg(narg)
         integer, intent (in)       ::  m, lnum, ioprad, iopang, iopnorm, narg
         complex(knd), intent (out) ::  r1c(lnum), r1dc(lnum), r2c(lnum), r2dc(lnum), &
@@ -130,7 +130,7 @@
       Input and output parameters appearing in the subroutine call
       statement are defined below:
 
-          c      : desired complex value of the size parameter (= kd/2,
+          cc     : desired complex value of the size parameter c (= kd/2,
                    where k =  the complex wavenumber and d = interfocal
                    length) [real(knd)]
           m      : desired value for the order m (integer)
@@ -252,7 +252,7 @@
                       scaled angular functions have unity norm.
 
        line 3:
-          c      : value of the complex size parameter (= kd/2, where k =
+          cc     : value of the complex size parameter c (= kd/2, where k =
                    the complex wavenumber and d = interfocal length) [complex(knd)]
           x1     : value of the radial coordinate x minus one [real(knd)]
                    (a nominal value of 10.0e0_knd can be entered for x1
