@@ -1648,7 +1648,7 @@ end if
                          nacciope, jeta, iopnee, neemark, naccd, naccn, &
                          naccnmax, nacccor, naccns)
               netatry = netatry + 1
-              naccetas = nacceta
+              naccetas = nacceta 
 if (debug) then
 580           if(nacciope == 0) write(40, 590)
 590           format(15x,'r2eta accuracy is calculated using the', &
@@ -1690,21 +1690,20 @@ end if
               ir2de(li) = ir2dee
               if(nacciope /= 0) nacciop = 1
 610           continue
-              nacccor = min(nacccor, nacceta - naccetao)
 if (debug) then
                 if(knd == kindd) then
                 if(nacciope /= 0 .or. nacccor == 0 .or. naccetas == 0) &
                    write(40, 620) naccetas, etaval, nee, r2ec, ir2ee, r2dec, &
                                  ir2dee
 620             format(15x,'accuracy = ',i3,' decimal digits; eta', &
-                       ' = ',f12.9,'; nee = ',i4,/,10x,'r2 = ', f17.14, &
+                       ' = ',f17.14,'; nee = ',i4,/,10x,'r2 = ', f17.14, &
                        f17.14, i6, 2x,'r2d = ',f17.14, f17.14, i6)
                 if(nacciope == 0 .and. nacccor > 0 .and. naccetas /= 0) &
                    write(40, 625) naccetas, nacccor, etaval, nee, r2ec, ir2ee, &
                                  r2dec, ir2dee
 625             format(15x,'accuracy =',i3,' decimal digits,' &
                        ' adjusted for',i3,' subtraction digits in' &
-                       ' forming Wronskian;'/,15x,' eta = ',f12.9,';' &
+                       ' forming Wronskian;'/,15x,' eta = ',f17.14,';' &
                        ' nee = ',i4,/10x,'r2 = ',f17.14, f17.14, i5, &
                        2x,'r2d = ',f17.14, f17.14, 2x, i5)
                 end if
@@ -1713,14 +1712,14 @@ if (debug) then
                    write(40, 630) naccetas, etaval, nee, r2ec, ir2ee, r2dec, &
                                  ir2dee
 630             format(15x,'accuracy = ',i3,' decimal digits; eta', &
-                       ' = ',f12.9,'; nee = ',i4,/,10x,'r2 = ', f33.30, &
+                       ' = ',f17.14,'; nee = ',i4,/,10x,'r2 = ', f33.30, &
                        f33.30, i6,/,10x,'r2d = ',f33.30, f33.30, i6)
                 if(nacciope == 0 .and. nacccor > 0 .and. naccetas /= 0) &
                    write(40, 635) naccetas, nacccor, etaval, nee, r2ec, ir2ee, &
                                  r2dec, ir2dee
 635             format(15x,'accuracy =',i3,' decimal digits,' &
                        ' adjusted for',i3,' subtraction digits in' &
-                       ' forming Wronskian;'/,15x,' eta = ',f12.9,';' &
+                       ' forming Wronskian;'/,15x,' eta = ',f17.14,';' &
                        ' nee = ',i4,/,10x,'r2 = ',f33.30, f33.30, i6, &
                        /,10x,'r2d = ',f33.30, f33.30, i6)
                 end if
@@ -2206,7 +2205,7 @@ if (debug) then
         if(iopnorm == 0) write(50, 215)
 215     format(5x,'s1 has the same normalization as the', &
                ' corresponding Legendre function.')
-end if 
+end if
 !
 !  compute the angular function s1
           do 380 k = 1, narg
