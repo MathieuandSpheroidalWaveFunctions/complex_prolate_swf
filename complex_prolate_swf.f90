@@ -1758,21 +1758,20 @@ end if
               ir2de(li) = ir2dee
               if(nacciope /= 0) nacciop = 1
 610           continue
-              nacccor = min(nacccor, nacceta - naccetao)
 if (debug) then
                 if(knd == kindd) then
                 if(nacciope /= 0 .or. nacccor == 0 .or. naccetas == 0) &
                    write(40, 620) naccetas, etaval, nee, r2ec, ir2ee, r2dec, &
                                  ir2dee
 620             format(15x,'accuracy = ',i3,' decimal digits; eta', &
-                       ' = ',f12.9,'; nee = ',i4,/,10x,'r2 = ', f17.14, &
+                       ' = ',f17.14,'; nee = ',i4,/,10x,'r2 = ', f17.14, &
                        f17.14, i6, 2x,'r2d = ',f17.14, f17.14, i6)
                 if(nacciope == 0 .and. nacccor > 0 .and. naccetas /= 0) &
                    write(40, 625) naccetas, nacccor, etaval, nee, r2ec, ir2ee, &
                                  r2dec, ir2dee
 625             format(15x,'accuracy =',i3,' decimal digits,' &
                        ' adjusted for',i3,' subtraction digits in' &
-                       ' forming Wronskian;'/,15x,' eta = ',f12.9,';' &
+                       ' forming Wronskian;'/,15x,' eta = ',f17.14,';' &
                        ' nee = ',i4,/10x,'r2 = ',f17.14, f17.14, i5, &
                        2x,'r2d = ',f17.14, f17.14, 2x, i5)
                 end if
@@ -1781,14 +1780,14 @@ if (debug) then
                    write(40, 630) naccetas, etaval, nee, r2ec, ir2ee, r2dec, &
                                  ir2dee
 630             format(15x,'accuracy = ',i3,' decimal digits; eta', &
-                       ' = ',f12.9,'; nee = ',i4,/,10x,'r2 = ', f33.30, &
+                       ' = ',f17.14,'; nee = ',i4,/,10x,'r2 = ', f33.30, &
                        f33.30, i6,/,10x,'r2d = ',f33.30, f33.30, i6)
                 if(nacciope == 0 .and. nacccor > 0 .and. naccetas /= 0) &
                    write(40, 635) naccetas, nacccor, etaval, nee, r2ec, ir2ee, &
                                  r2dec, ir2dee
 635             format(15x,'accuracy =',i3,' decimal digits,' &
                        ' adjusted for',i3,' subtraction digits in' &
-                       ' forming Wronskian;'/,15x,' eta = ',f12.9,';' &
+                       ' forming Wronskian;'/,15x,' eta = ',f17.14,';' &
                        ' nee = ',i4,/,10x,'r2 = ',f33.30, f33.30, i6, &
                        /,10x,'r2d = ',f33.30, f33.30, i6)
                 end if
@@ -5469,12 +5468,12 @@ end if
 if (debug) then
         if(knd == kindd) then
           write(40, 180) l, eigst, idigc, ifc
-180       format(1x,'l = ',i4,' eigen. estimate',e24.15, e24.15, &
+180       format(1x,'l = ',i4,' eigen. estimate',e23.14, e23.14, &
                  /,10x,'conv. to',i3,' dig. at ifc =',i3)
           end if
           if(knd == kindq) then
           write(40, 190) l, eigst, idigc, ifc
-190       format(1x,'l = ',i4,' eigen. estimate',e41.32, e41.32, &
+190       format(1x,'l = ',i4,' eigen. estimate',e39.30, e39.30, &
                  /,10x,'conv. to',i3,' dig. at ifc =',i3)
           end if
 end if
