@@ -3,7 +3,9 @@
   Cprofcn is available as both a subroutine version provided as the
   module complex_prolate_swf and a stand alone version cprofcn. It was
   originally developed by arnie lee van buren about 2005 with technical
-  support from jeffrey boisvert. The current version is a major update. 
+  support from jeffrey boisvert. The current version 1.04 adds the
+  capability to calculate the radial functions of the first kind and
+  their first derivatives for x = 1.0. 
 
   Table of Contents
   1. Purpose
@@ -63,7 +65,7 @@
   kind values that do not correspond to the number of bytes. In this
   case just use the appropriate integers for the kind parameters in
   module param. Also change the values of kindd and kindq set in
-  statement 5 below below the comments section to the kind values for
+  statement 5 below the comments section to the kind values for
   double precision data and quadruple precision data, respectively.
 
   This program for complex c is a major advance in capability
@@ -87,6 +89,13 @@
   2009.01618, August 2020. Some of the methods used in cprofcn were
   first developed for use in the program coblfcn that is described in
   this article.
+  
+  Expressions to calculate the radial functions of the first kind and its
+  first derivatives for x = 1.0 when m = 0 are obtained from the limits of
+  equations given in the first reference (with c now complex). The radial
+  functions of the first kind and their first derivatives are equal to 0.0
+  when m is unequal to 0. [The corresponding radial functions of the second
+  kind and their first derivatives are infinite for all m.]
 
   Cprofcn provides function values for c complex = real(c) + i aimag(c)
   = cr + i ci, where the imaginary part ci often accounts for losses in
@@ -145,6 +154,14 @@
                  : =2 if radial functions of both kinds and
                       their first derivatives are computed
           x1     : x - 1, where x is the radial coordinate [real(knd)]
+                   [When x1 = 0.0, i.e., x = 1.0, only radial functions
+                   of the first kind and their first derivatives
+                   are calculated. Radial functions of the second
+                   kind and their first derivtives are infinite.
+                   Thus ioprad must be set equal to 1. Note
+                   also that the radial functions of the first kind
+                   and their first derivatives are equal to zero
+                   unless m = 0.] 
           iopang : (integer)
                  : =0 if angular functions are not computed
                  : =1 if angular functions of the first kind
@@ -256,7 +273,13 @@
                    the complex wavenumber and d = interfocal length) [complex(knd)]
           x1     : value of the radial coordinate x minus one [real(knd)]
                    (a nominal value of 10.0e0_knd can be entered for x1
-                   if ioprad = 0)
+                   if ioprad = 0). If x1 = 0, i.e., x = 1.0, only radial
+                   functions of the first kind and their first derivatives
+                   can be calculated. Radial functions of the second kind
+                   and their first derivatives are infinite. Thus ioprad
+                   must be set equal to 1. Note also that the radial functions
+                   of the first kind and their first derivatives are equal
+                   to 0 unless m is equal to 0.]
 
        line 4:
           ioparg : (integer)
@@ -684,7 +707,23 @@
      x = 1.10: 2000(800); 3000(1000); 4000(1000); 5000(1000)
      x = 1.105: 2000(850); 3000(1000); 4000(1000); 5000(1000)
          
-     Estimated angular function accuracy
+   Estimated r1 and r1d accuracy for x = 1.0  
+
+  When x = 1.0 the resulting function values provided by profcn for r1 and r1d
+  for m = 0 have an accuracy based on subtraction errors in the Flammer
+  normalization constant. These subtraction errors are zero for real c and
+  increase as the imaginary value of c increases. For a given c the subtraction
+  errors are non-zero only when l is near the so-called breakpoint value
+  lb = 2*cr/pi. The subtraction errors near l = lb are similar in magnitude
+  to those that occur when computing the Flammer normalization constant for
+  oblate functions when c is real with a value equal to ci. The size of these
+  errors prevents the use of double precision for obtaining sufficiently
+  accurate values for r1 and r1d when ci is larger than about 20. It is
+  recommended that the hybrid version be used, i.e., knd = 8 and knd1 = 16,
+  when ci is less than 20 and double precision is desired. Use of quadruple
+  precision extends the range of ci to about 60.
+
+   Estimated angular function accuracy
 
   For both choices of arithmetic, the angular functions and their first
   derivatives can lose accuracy for low l, high c, and eta near unity
@@ -766,19 +805,21 @@
   functions. Here the angular functions have the same norm as the
   corresponding associated Legendre functions. When c is real the
   calculation of the normalizing factor is accurate with no associated
-  subraction errors. As ci increases and to a some extent as cr
-  increases, the subtraction errors increase for some values of l. They
-  are near zero for ci up to 10, then increase to 6 digits at ci = 20
-  and to digits at ci = 50. See the discussion of this in the section
-  'Estimated angular function accuracy' given above. The subroutine
-  s1 computes d(subscript l-m) for this normalization and returns it to
-  subroutine main as a characteristic dmlms and an exponent idmlmse. Use
-  of an exponent avoids possible overflow of d(subscript l-m) for
-  extremely large c and m. When the user sets iopnorm = 1 so that the
-  angular functions have unit norm, the corresponding characteristic
-  and exponent for d(subscript l-m) are calculated in subroutine s1
-  and returned to subroutine main as dmlms1 and idmlms1e. Corresponding
-  values for the characteristic and exponent of d(subscript l-m) for the
+  subraction errors. As ci increases and to some extent as cr
+  increases, the subtraction errors increase for some values of l. The
+  subtraction errors are greatest for m = 0 and decrease rapidly with
+  increasing m. For m = 0, they are near zero for ci up to 10, then
+  increase to about 6 digits at ci = 20 and about 15 digits at ci = 50.
+  See the discussion of this in the section 'Estimated angular function
+  accuracy' given above. The subroutine s1 computes d(subscript l-m)
+  for this normalization and returns it to subroutine main as a
+  characteristic dmlms and an exponent idmlmse. Use of an exponent
+  avoids possible overflow of d(subscript l-m) for extremely large c
+  and m. When the user sets iopnorm = 1 so that the angular functions
+  have unit norm, the corresponding characteristic and exponent for
+  d(subscript l-m) are calculated in subroutine s1 and returned to
+  subroutine main as dmlms1 and idmlms1e. Corresponding values for
+  the characteristic and exponent of d(subscript l-m) for the
   Morse and Feshbach and for the Flammer normalizations are computed
   in dnorm and returned to main as dmlmf, idmlmfe and dmlf, idmlfe. Note
   that for c complex, all three of these normalization calculations
