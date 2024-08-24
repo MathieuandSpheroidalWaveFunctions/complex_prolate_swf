@@ -3,9 +3,9 @@
   Cprofcn is available as both a subroutine version provided as the
   module complex_prolate_swf and a stand alone version cprofcn. It was
   originally developed by arnie lee van buren about 2005 with technical
-  support from jeffrey boisvert. The current version 1.04 adds the
-  capability to calculate the radial functions of the first kind and
-  their first derivatives for x = 1.0. 
+  support from jeffrey boisvert. Version 1.04 added the capability
+  to calculate the radial functions of the first kind and their first
+  derivatives for x = 1.0. 
 
   Table of Contents
   1. Purpose
@@ -82,8 +82,8 @@
   spheroidal radial functions of the second kind and their first
   derivatives,' Quart. Appl. Math. 62 (2004), 493-507.
   
-  A manuscript describing the methods used in cprofcn will be written
-  and submitted to arXiv.org. In the meantime the user may want
+  I plan to write a manuscript describing the methods used in cprofcn
+  and submit it to arXiv.org. In the meantime the user may want
   to look at the article 'Calculation of oblate spheroidal wave
   functions with complex argument,' available at arXiv.org, identifier
   2009.01618, August 2020. Some of the methods used in cprofcn were
