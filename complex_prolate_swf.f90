@@ -1520,6 +1520,7 @@ end if
               iopeta = 1
               if(nacccor == 0) nee = max(nee, 993 - incnee * (minacc - naccneu &
                                    +1))
+              if(nee > neta) nee = neta                     
               end if
               nacccor = min(nacccor, naccneu - naccneuo, naccneu)
               if(nacccor < 0) nacccor = 0

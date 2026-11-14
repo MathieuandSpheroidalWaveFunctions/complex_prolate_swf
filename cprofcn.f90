@@ -1,5 +1,5 @@
 program cprofcn
-!      version 1.06 Aug 2024
+!      version 1.07 Nov 2026
     use param
 
 !  Originally developed about 2005 by arnie lee van buren with
@@ -1461,6 +1461,7 @@ end if
               iopeta = 1
               if(nacccor == 0) nee = max(nee, 993 - incnee * (minacc - naccneu &
                                    +1))
+              if(nee > neta) nee = neta                     
               end if
               nacccor = min(nacccor, naccneu - naccneuo, naccneu)
               if(nacccor < 0) nacccor = 0
