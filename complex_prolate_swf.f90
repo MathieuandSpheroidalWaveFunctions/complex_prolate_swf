@@ -7,7 +7,7 @@ module complex_prolate_swf
                        r1c, ir1e, r1dc, ir1de, r2c, ir2e, r2dc, ir2de, naccr, &
                        s1c, is1e, s1dc, is1de, naccs, naccds)
 
-!      version 1.06 August 2024
+!      version 1.07 August 2026
 !
 !  subroutine version of the fortran program cprofcn developed about 2005 by
 !  arnie lee van buren with technical support from jeffrey boisvert. For more
